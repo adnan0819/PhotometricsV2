@@ -1,0 +1,10 @@
+<div class="row voffset">
+    <div ng-repeat="image in images">
+        <div class="clearfix" ng-if="$index % 6 == 0"></div>
+        <div class="col-sm-6 col-md-4 col-lg-2 voffset">
+            <a href="#/images/{{ image.id }}">
+                <img class="img-responsive img-rounded" src="{{image.path}}" />
+            </a>
+        </div>
+    </div>
+</div>

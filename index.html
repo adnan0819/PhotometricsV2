@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html data-ng-app="photoMetricsApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="A Dynamic Image Database Sorted by Aesthetic Appeal">
+        <title>PhotoMetrics</title>
+        <link rel="stylesheet" href="main.css">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    <body>
+        <div class="container">
+            
+            <div class="jumbotron text-center">
+                <h1>PhotoMetrics</h1>
+                <p>Select a picture. We will show you similar images from our database.</p>
+            </div>
+            
+            <div ng-view></div>
+
+        </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+        <script src="scripts/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="app/app.js"></script>
+        <script src="app/controllers/imagesController.js"></script>
+        <script src="app/controllers/resultsController.js"></script>
+        <script src="app/services/imagesFactory.js"></script>
+        <script src="node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+    </body>
+
+</html>

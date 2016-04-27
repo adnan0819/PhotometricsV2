@@ -1,0 +1,9 @@
+{
+  "name": "photometrics",
+  "version": "0.0.1",
+  "description": "retrieves similar images",
+  "dependencies": {
+  	"express": "latest",
+		"socket.io": "^1.2.0"
+  }
+}

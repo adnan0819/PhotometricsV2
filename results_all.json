@@ -1,0 +1,11 @@
+{"id": 10, "name": "im9.jpg" , "rule": "Both", "score": 1586}
+{"id": 1, "name": "im1.jpg" , "rule": "ROT", "score": 11},
+{"id": 2, "name": "im10.jpg" , "rule": "ROT", "score": 49},
+{"id": 3, "name": "im2.jpg" , "rule": "ROT", "score": 81},
+{"id": 4, "name": "im3.jpg" , "rule": "ROT", "score": 50},
+{"id": 5, "name": "im4.jpg" , "rule": "ROT", "score": 19},
+{"id": 6, "name": "im5.jpg" , "rule": "ROT", "score": 8},
+{"id": 7, "name": "im6.jpg" , "rule": "ROT", "score": 100},
+{"id": 8, "name": "im7.jpg" , "rule": "ROT", "score": 36},
+{"id": 9, "name": "im8.jpg" , "rule": "ROT", "score": 9},
+{"id": 10, "name": "im9.jpg" , "rule": "ROT", "score": 30}
