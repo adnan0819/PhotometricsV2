@@ -1,7 +1,7 @@
 function normed=frames_json(img)
-close all;
+
 %maxScore=frames_getMaxScore();
-maxScore=800;
+maxScore=125;
 rgbImage=img;
 fontSize=20;
 % Read in image into an array.
@@ -31,46 +31,44 @@ if numberOfColorBands == 1
 	end
 end 
 % Display the original image.
-subplot(2, 2, 1);
-imshow(rgbImage);
-set(gcf, 'Position', get(0,'Screensize')); % Enlarge figure to full screen.
-set(gcf,'name','Find frames (squares, rectangles, triangles and circles)','numbertitle','off') 
-drawnow; % Make it display immediately. 
+%subplot(2, 2, 1);
+%imshow(rgbImage);
+%set(gcf, 'Position', get(0,'Screensize')); % Enlarge figure to full screen.
+%set(gcf,'name','Find frames (squares, rectangles, triangles and circles)','numbertitle','off') 
+%drawnow; % Make it display immediately. 
 if numberOfColorBands > 1 
-	title('Original Color Image', 'FontSize', fontSize); 
+	%title('Original Color Image', 'FontSize', fontSize); 
 	grayImage = rgbImage(:,:,1);
 else 
-	caption = sprintf('Original Indexed Image\n(converted to true color with its stored colormap)');
-	title(caption, 'FontSize', fontSize);
+	%caption = sprintf('Original Indexed Image\n(converted to true color with its stored colormap)');
+	%title(caption, 'FontSize', fontSize);
 	grayImage = rgbImage;
 end
 % Display it.
-subplot(2, 2, 2);
-imshow(grayImage, []);
-title('Grayscale Image', 'FontSize', fontSize);
+%subplot(2, 2, 2);
+%imshow(grayImage, []);
+%title('Grayscale Image', 'FontSize', fontSize);
 % Binarize the image.
-binaryImage = im2bw(grayImage, 0.6);
+binaryImage = grayImage < 80;
 % Display it.
-subplot(2, 2, 3);
-imshow(binaryImage, []);
-title('Binary Image', 'FontSize', fontSize);
+%subplot(2, 2, 3);
+%imshow(binaryImage, []);
+%title('Binary Image', 'FontSize', fontSize);
 % Remove small objects.
 binaryImage = bwareaopen(binaryImage, 300);
 % Display it.
-subplot(2, 2, 4);
-imshow(binaryImage, []);
-title('Cleaned Binary Image', 'FontSize', fontSize);
+%subplot(2, 2, 4);
+%imshow(binaryImage, []);
+%title('Cleaned Binary Image', 'FontSize', fontSize);
 [labeledImage numberOfObjcts] = bwlabel(binaryImage);
 blobMeasurements = regionprops(labeledImage, 'Perimeter','Area' , 'BoundingBox'); 
-imshow(binaryImage);
-imwrite(binaryImage,'Interim3.jpg');
-
+figure;
+%imshow(binaryImage,[]);
 % for square ((a>17) && (a<20))
 % for circle ((a>13) && (a<17))
 % for triangle ((a>20) && (a<30))
 circularities=[];
 score=0;
-
 for t = 1 : numberOfObjcts
    % if(blobMeasurements(t).Area>(size(rgbImage,1)*size(rgbImage,2)*10/100))
         q=(blobMeasurements(t).Perimeter.^2) ./ (4 * pi * blobMeasurements(t).Area);
@@ -79,26 +77,30 @@ for t = 1 : numberOfObjcts
         %disp(score);
     %end
 end
-score=(score/(size(rgbImage,1)*size(rgbImage,2)))*1000;
+score=(score/(size(rgbImage,1)*size(rgbImage,2)))*100;
 disp(score);
-score=score./maxScore*100;
 disp('total');
 disp(score);
+%circularities = [blobMeasurements.Perimeter.^2] ./ (4 * pi * [blobMeasurements.Area])
 
-im=rgbImage;
-hold on;
 
+%{
+figure;
 imshow(rgbImage);
 for k = 1 : length(blobMeasurements)
   thisBB = blobMeasurements(k).BoundingBox;
   rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],...
   'EdgeColor','r','LineWidth',2 )
+disp('num next');    
+disp(k);
 end
+
+%Saving now
 f = getframe(gca);
 im = frame2im(f);
 
 imwrite(im,'interim2.jpg');
 
-%circularities = [blobMeasurements.Perimeter.^2] ./ (4 * pi * [blobMeasurements.Area])
+%}
 
 normed=score;

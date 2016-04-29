@@ -15,7 +15,12 @@ function normed=ROT_Score(score, centroidOfSalientROI,fullArea,maxDim)
         %a=1/(maxDim/(min(score(i,:)))); THIS WORKS
         %a is the measure of alignment from grids
         a=((min(score(i,:)))/(maxDim*2/3))*0.5;
+        if (size(centroidOfSalientROI,1)>=1)
+            
         b=(centroidOfSalientROI(i).Area/fullArea)*0.5;
+        else
+            b=0;
+        end
         %disp(centroidOfSalientROI(i).Area);
         bench=max(score(i,:));
         bench=bench*fullArea;

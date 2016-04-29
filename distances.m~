@@ -96,6 +96,4 @@ function [dist, score]=distances(centroidOfSalientROI, gridPoints)
     %and so on
         
     else
-        dist=0;
-        score(1,1)=0
-    end
+        dist=0

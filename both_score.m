@@ -31,11 +31,11 @@ if numberOfColorBands == 1
 	end
 end 
 % Display the original image.
-subplot(2, 2, 1);
+%subplot(2, 2, 1);
 %imshow(rgbImage);
-set(gcf, 'Position', get(0,'Screensize')); % Enlarge figure to full screen.
-set(gcf,'name','Find frames (squares, rectangles, triangles and circles)','numbertitle','off') 
-drawnow; % Make it display immediately. 
+%set(gcf, 'Position', get(0,'Screensize')); % Enlarge figure to full screen.
+%set(gcf,'name','Find frames (squares, rectangles, triangles and circles)','numbertitle','off') 
+%drawnow; % Make it display immediately. 
 if numberOfColorBands > 1 
 	title('Original Color Image', 'FontSize', fontSize); 
 	grayImage = rgbImage(:,:,1);
@@ -63,7 +63,7 @@ binaryImage = bwareaopen(binaryImage, 300);
 %imshow(binaryImage, []);
 %title('Cleaned Binary Image', 'FontSize', fontSize);
 [labeledImage numberOfObjcts] = bwlabel(binaryImage);
-figure;
+%figure;
 imshow(binaryImage);
 imwrite(binaryImage,'Interim3.jpg');
 
