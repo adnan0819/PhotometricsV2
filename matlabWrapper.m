@@ -1,5 +1,5 @@
  % NOTE TO SELF WRITE INTERIM IMAGES - ALL DONE EXCEPT GRID
-function score_final=matlabWrapper(image, category, rule)
+function matlabWrapper(image, category, rule)
  		
  		%path = strcat('Mir/', category,'/',image);
 
