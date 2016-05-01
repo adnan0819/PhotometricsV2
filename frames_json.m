@@ -49,7 +49,7 @@ end
 %imshow(grayImage, []);
 %title('Grayscale Image', 'FontSize', fontSize);
 % Binarize the image.
-binaryImage = grayImage < 80;
+binaryImage = grayImage < 100;
 % Display it.
 %subplot(2, 2, 3);
 %imshow(binaryImage, []);
@@ -82,7 +82,21 @@ disp(score);
 disp('total');
 disp(score);
 %circularities = [blobMeasurements.Perimeter.^2] ./ (4 * pi * [blobMeasurements.Area])
+im=rgbImage;
+hold on;
 
+imshow(rgbImage);
+for k = 1 : length(blobMeasurements)
+  thisBB = blobMeasurements(k).BoundingBox;
+  rectangle('Position', [thisBB(1),thisBB(2),thisBB(3),thisBB(4)],...
+  'EdgeColor','r','LineWidth',2 )
+end
+
+f = getframe(gca);
+im = frame2im(f);
+
+imwrite(im,'Input_Image_Salient_Salient_Regions.jpg');
+imwrite(binaryImage,'Input_Image_Binary_Map.jpg');
 
 %{
 figure;

@@ -64,8 +64,8 @@ binaryImage = bwareaopen(binaryImage, 300);
 %title('Cleaned Binary Image', 'FontSize', fontSize);
 [labeledImage numberOfObjcts] = bwlabel(binaryImage);
 %figure;
-imshow(binaryImage);
-imwrite(binaryImage,'Interim3.jpg');
+%imshow(binaryImage);
+imwrite(binaryImage,'Input_Image_Binary_Map.jpg');
 
 blobMeasurements = regionprops(labeledImage); 
 % for square ((a>17) && (a<20))
@@ -97,7 +97,7 @@ end
 f = getframe(gca);
 im = frame2im(f);
 
-imwrite(im,'interim2.jpg');
+imwrite(im,'Input_Image_Salient_Salient_Regions.jpg');
 score=normed*4; %LOOK AT THIS 4 LATER TO ADJUST
 
 json = fopen('results.json','w'); 

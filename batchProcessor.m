@@ -21,12 +21,16 @@ function score_scaled=matlabWrapper(image, category, rule)
 			maxDim=max(size(img,1),size(img,2));
 			normed=ROT_Score(score, centroidOfSalientROI,fullArea, maxDim);
 			score_final=normed;
-			   
+            
 			   json = fopen('result.json','w'); 
 			   fprintf(json,'{');
 			   fprintf('{');
 			   maxScr=230; %ONLY THIS DEPENDS ON CATEGORY
 			   score_scaled=normed/maxScr*100;
+               if (score_scaled<10)
+                    score_scaled=score_scaled*10;
+               end
+			   
                
 			   fprintf(json,'"category": "%s", "imageName": "%s", "rule": "ROT", "score": %d', category, image,ceil(score_scaled));
 			   
@@ -47,6 +51,9 @@ function score_scaled=matlabWrapper(image, category, rule)
 			   fprintf(json,'{');
 			   fprintf('{');
 			   maxScr=125; %ONLY THIS DEPENDS ON CATEGORY
+                if (score_scaled<10)
+                    score_scaled=score_scaled*10;
+               end
 			   
 			   fprintf(json,'"category": "%s", "imageName": "%s", "rule": "frame", "score": %d', category, image,ceil(score_scaled));
 			   
@@ -68,7 +75,9 @@ function score_scaled=matlabWrapper(image, category, rule)
 			   fprintf('{');
 			   maxScr=620; %ONLY THIS DEPENDS ON CATEGORY
 			   score_scaled=normed/maxScr*100;
-
+                if (score_scaled<10)
+                    score_scaled=score_scaled*10;
+               end
 			   fprintf(json,'"category": "%s", "imageName": "%s", "rule": "both", "score": %d', category, image,ceil(score_scaled));
 			   
 			   %The block below is not needed

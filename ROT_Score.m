@@ -34,8 +34,8 @@ function normed=ROT_Score(score, centroidOfSalientROI,fullArea,maxDim)
         sum=(sum+(normed*1));
     end
     sum=sum/size(score,1); %size(score,1)is the number of ROIs
-    
-    
+       
     normed=sum*100;
-    
-    
+    if (normed<10)
+        normed=normed*10
+    end

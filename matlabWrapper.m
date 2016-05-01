@@ -17,6 +17,7 @@ function matlabWrapper(image, category, rule)
 			saliency = ittikochmap(img);
 			gridPoints=drawGrid(img);
 			centroidOfSalientROI=labelROICentroid(saliency.master_map_resized);
+            imwrite(saliency.master_map_resized,'Input_Image_Saliency_Map.jpg');
 			[dist, score]=distances(centroidOfSalientROI, gridPoints);
 			maxDim=max(size(img,1),size(img,2));
 			normed=ROT_Score(score, centroidOfSalientROI,fullArea, maxDim);
@@ -27,7 +28,10 @@ function matlabWrapper(image, category, rule)
 			   fprintf('{');
 			   maxScr=230; %ONLY THIS DEPENDS ON CATEGORY
 			   score_scaled=normed/maxScr*100;
-               
+               if (score_scaled<10)
+                    score_scaled=score_scaled*10;
+               end
+			   
 			   fprintf(json,'"category": "%s", "imageName": "%s", "rule": "ROT", "score": %d', category, image,ceil(score_scaled));
 			   
 			   %The block below is not needed
@@ -36,11 +40,13 @@ function matlabWrapper(image, category, rule)
 			        fprintf(json,'}\n');
 			        fprintf('}\n');
 	    	   fclose(json);
+               close all;
         
 
         elseif(strcmp(rule,'frame'))
 
 			   normed=frames_json(img);
+               gridPoints=drawGrid(img);
 			   score_final=normed;
                score_scaled=score_final;
 			   json = fopen('result.json','w'); 
@@ -56,6 +62,7 @@ function matlabWrapper(image, category, rule)
 			        fprintf(json,'}\n');
 			        fprintf('}\n');
 	    	   fclose(json);
+               close all;
 
 		
         elseif(strcmp(rule,'both'))
@@ -68,6 +75,10 @@ function matlabWrapper(image, category, rule)
 			   fprintf('{');
 			   maxScr=620; %ONLY THIS DEPENDS ON CATEGORY
 			   score_scaled=normed/maxScr*100;
+               if (score_scaled<10)
+                    score_scaled=score_scaled*10;
+               end
+			   
 
 			   fprintf(json,'"category": "%s", "imageName": "%s", "rule": "both", "score": %d', category, image,ceil(score_scaled));
 			   
@@ -77,6 +88,6 @@ function matlabWrapper(image, category, rule)
 			        fprintf(json,'}\n');
 			        fprintf('}\n');
 	    	   fclose(json);
-
+               close all;
 
         end
